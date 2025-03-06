@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css"; // Using separate CSS file
+import styles from "./login.module.css"; // Importing modular CSS
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -38,35 +38,41 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="input-group">
-                    <label>Email or Username:</label>
+        <div className={styles.loginContainer}>
+            <h2 className={styles.title}>Login</h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <div className={styles.inputGroup}>
+                    <label className={styles.label}>Email or Username:</label>
                     <input
                         type="text"
                         name="emailOrUsername"
                         value={formData.emailOrUsername}
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
                 </div>
-                <div className="input-group">
-                    <label>Password:</label>
+                <div className={styles.inputGroup}>
+                    <label className={styles.label}>Password:</label>
                     <input
                         type="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                         required
+                        className={styles.input}
                     />
                 </div>
-                {error && <p className="error-message">{error}</p>}
-                <button type="submit">Login</button>
-                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+                {error && <p className={styles.errorMessage}>{error}</p>}
+                <button className={styles.button} type="submit">Login</button>
+                <p className={styles.footerText}>
+                    Don't have an account? <a href="/signup" className={styles.link}>Sign Up</a>
+                </p>
             </form>
         </div>
     );
 };
 
 export default Login;
+
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './form.css'; // Ensure this CSS file is linked for styles
+import styles from "./form.module.css"; // Import modular CSS
 
 const FormCareerRequest = () => {
   const [showInput, setShowInput] = useState(false);
@@ -29,11 +29,11 @@ const FormCareerRequest = () => {
 
   // for hobbies
   const handleAddHobby = () => {
-    setHobbies([...hobbies, { id: Date.now(), value: "" }]); // Correctly update hobbies state
+    setHobbies([...hobbies, { id: Date.now(), value: "" }]);
   };
 
   const handleRemoveHobby = (id) => {
-    setHobbies(hobbies.filter((hobby) => hobby.id !== id)); // Correctly update hobbies state
+    setHobbies(hobbies.filter((hobby) => hobby.id !== id));
   };
 
   const handleHobbyChange = (id, value) => {
@@ -41,60 +41,60 @@ const FormCareerRequest = () => {
       hobbies.map((hobby) =>
         hobby.id === id ? { ...hobby, value: value } : hobby
       )
-    ); // Correctly update hobbies state
+    );
   };
 
   return (
-    <div className="form-career-request">
+    <div className={styles.formCareerRequest}>
       <form>
-        <div className="form-section">
-          <div className="form-group">
+        <div className={styles.formSection}>
+          <div className={styles.formGroup}>
             <label htmlFor="user-role">Who are you?</label>
-            <select id="user-role" name="userRole" className="form-select">
-              <option value="university-student" className="option-style">
+            <select id="user-role" name="userRole" className={styles.formSelect}>
+              <option value="university-student" className={styles.optionStyle}>
                 University Student
               </option>
-              <option value="job-seeker" className="option-style">
+              <option value="job-seeker" className={styles.optionStyle}>
                 Job Seeker
               </option>
-              <option value="career-counselor" className="option-style">
+              <option value="career-counselor" className={styles.optionStyle}>
                 Career Counselor
               </option>
             </select>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="user-age">Age</label>
             <input
               type="text"
               id="user-age"
               placeholder="Enter your age"
-              className="form-input"
+              className={styles.formInput}
             />
           </div>
 
           {/* Hobbies Section */}
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="user-hobby">Hobby</label>
             {hobbies.map((hobby) => (
-              <div key={hobby.id} className="form-group input-container">
+              <div key={hobby.id} className={`${styles.formGroup} ${styles.inputContainer}`}>
                 <input
                   type="text"
                   placeholder="Please specify..."
                   value={hobby.value}
                   onChange={(e) => handleHobbyChange(hobby.id, e.target.value)}
-                  className="form-input"
+                  className={styles.formInput}
                 />
                 <button
                   type="button"
-                  className="button-add"
+                  className={styles.buttonAdd}
                   onClick={handleAddHobby}
                 >
                   +
                 </button>
                 <button
                   type="button"
-                  className="button-remove"
+                  className={styles.buttonRemove}
                   onClick={() => handleRemoveHobby(hobby.id)}
                 >
                   x
@@ -104,9 +104,9 @@ const FormCareerRequest = () => {
           </div>
 
           {/* Special Needs Section */}
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Do you have special needs?</label>
-            <div className="radio-group">
+            <div className={styles.radioGroup}>
               <label>
                 <input
                   type="radio"
@@ -130,24 +130,24 @@ const FormCareerRequest = () => {
 
           {showInput &&
             inputs.map((input) => (
-              <div key={input.id} className="form-group input-container">
+              <div key={input.id} className={`${styles.formGroup} ${styles.inputContainer}`}>
                 <input
                   type="text"
                   placeholder="Please specify..."
                   value={input.value}
                   onChange={(e) => handleChange(input.id, e.target.value)}
-                  className="form-input"
+                  className={styles.formInput}
                 />
                 <button
                   type="button"
-                  className="button-add"
+                  className={styles.buttonAdd}
                   onClick={handleAddInput}
                 >
                   +
                 </button>
                 <button
                   type="button"
-                  className="button-remove"
+                  className={styles.buttonRemove}
                   onClick={() => handleRemoveInput(input.id)}
                 >
                   x
@@ -156,10 +156,10 @@ const FormCareerRequest = () => {
             ))}
         </div>
 
-        <div className="form-section">
-          <div className="form-group">
+        <div className={styles.formSection}>
+          <div className={styles.formGroup}>
             <label>Interested Job Types</label>
-            <div className="radio-group">
+            <div className={styles.radioGroup}>
               <label>
                 <input type="radio" name="job-type" value="on-site" />
                 On-site
@@ -171,25 +171,25 @@ const FormCareerRequest = () => {
             </div>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="field-of-interest">Field of interest</label>
             <input
               type="text"
               id="field-of-interest"
               placeholder="Your interests here"
-              className="form-input"
+              className={styles.formInput}
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Salary Range</label>
-            <div className="input-inline">
+            <div className={styles.inputInline}>
               <div>
                 <label htmlFor="salary-min">Min</label>
                 <input
                   type="text"
                   id="salary-min"
-                  className="form-input salary-input"
+                  className={`${styles.formInput} ${styles.salaryInput}`}
                   placeholder="Minimum salary"
                 />
               </div>
@@ -198,7 +198,7 @@ const FormCareerRequest = () => {
                 <input
                   type="text"
                   id="salary-max"
-                  className="form-input salary-input"
+                  className={`${styles.formInput} ${styles.salaryInput}`}
                   placeholder="Maximum salary"
                 />
               </div>
@@ -211,7 +211,3 @@ const FormCareerRequest = () => {
 };
 
 export default FormCareerRequest;
-
-
-
-

@@ -1,0 +1,107 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.home {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+    background: #4caf50;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.heroTitle {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.heroDescription {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.ctaButton {
+    background-color: #fff;
+    color: #4caf50;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.ctaButton:hover {
+    background-color: #45a049;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.feature {
+    margin-bottom: 30px;
+}
+
+.feature h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Call to Action Section */
+.ctaSection {
+    background-color: #4caf50;
+    color: white;
+    text-align: center;
+    padding: 60px 0;
+}
+
+.ctaTitle {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.ctaDescription {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer p {
+    font-size: 1rem;
+}

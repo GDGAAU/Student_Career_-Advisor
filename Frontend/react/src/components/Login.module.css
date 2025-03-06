@@ -1,38 +1,43 @@
 /* General Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* Container */
-.login-container {
+.loginContainer {
     background: #ffffff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 350px;
     text-align: center;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Title */
+.title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 /* Form Fields */
-.input-group {
+.inputGroup {
     margin-bottom: 15px;
     text-align: left;
 }
 
-label {
+.label {
     display: block;
     font-size: 14px;
     color: #333;
     margin-bottom: 5px;
 }
 
-input {
+.input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -41,7 +46,7 @@ input {
 }
 
 /* Button */
-button {
+.button {
     width: 100%;
     padding: 10px;
     background-color: #4a4a4a;
@@ -51,26 +56,34 @@ button {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 10px;
 }
 
-button:hover {
+.button:hover {
     background-color: #333;
 }
 
 /* Error Message */
-.error-message {
+.errorMessage {
     color: red;
     font-size: 14px;
     margin-bottom: 10px;
 }
 
-/* Link */
-p a {
+/* Footer Text and Link */
+.footerText {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.link {
     color: #4a4a4a;
     text-decoration: none;
     font-weight: bold;
 }
 
-p a:hover {
+.link:hover {
     text-decoration: underline;
 }
+
