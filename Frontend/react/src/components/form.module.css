@@ -1,11 +1,11 @@
 .formCareerRequest {
   max-width: 650px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 30px 40px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
-  background-color: #e3e3e3;
+  background-color: #ededed;
 }
 
 .formCareerRequest form {
@@ -93,7 +93,7 @@
   margin-right: 5px; /* Adds spacing between the button and label */
 }
 .submitButton {
-  margin-top: -50px;
+  margin-top: -55px;
   display: inline-block;
   padding: 10px 22px;
   background-color: #04170d; /* A nice blue color */
