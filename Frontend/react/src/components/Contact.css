@@ -2,9 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f9;
     padding: 20px;
+    background-color: #f4f4f9;
 }
 
 .container {
@@ -17,8 +16,8 @@
     text-align: center;
 }
 
-.contact h1 {
-    margin-bottom: 10px;
+h1 {
+    margin-bottom: 20px;
     color: #333333;
 }
 
@@ -44,7 +43,6 @@
     display: block;
     color: #333333;
     font-weight: bold;
-    text-align: left;
 }
 
 .form-group input,
@@ -67,7 +65,7 @@
     height: 150px;
 }
 
-.contact-form button {
+.submit-button {
     padding: 15px 20px;
     border: none;
     border-radius: 5px;
@@ -76,9 +74,8 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
 }
 
-button:hover {
+.submit-button:hover {
     background-color: #388e3c;
 }

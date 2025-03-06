@@ -7,6 +7,11 @@ import User from "./components/User.jsx";
 import Footer from "./components/Footer.jsx";
 import { LoginProvider } from "./contexts/LoginContext.jsx";
 
+import Chatroom from "./components/chatroom.jsx";
+import Contact from "./components/Contact.jsx";
+import Profile from "./components/Profile.jsx";
+import Analytics from "./components/Analytics.jsx";
+
 function App() {
   return (
     <LoginProvider>
@@ -16,10 +21,17 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<User />} />
         <Route path="/form" element={<FormCareerRequest />} /> 
+        <Route path="/chat" element={<Chatroom />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/analytics" element={<Analytics />} />
       </Routes>
       <Footer/>
     </Router>
     </LoginProvider>
+
+
+
   );
 }
 
