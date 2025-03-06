@@ -17,9 +17,9 @@ const Header = () => {
           </div>
           <div className={`${styles.navMenu} ${isMenuOpen ? styles.open : ""}`}>
             <ul className={styles.navLinks}>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#signup">Sign Up</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="features">Features</a></li>
+              <li><a href="signup">Sign Up</a></li>
+              <li><a href="contact">Contact</a></li>
             </ul>
           </div>
           <button className={styles.menuToggle} onClick={toggleMenu}>
