@@ -16,7 +16,7 @@ function LoginProvider({ children }) {
   function login({ email, password }) {
     const fetchUser = async () => {
       const result = await fetch(
-        `localhost:5000/login?email=${email}&password=${password}`
+        `/login?email=${email}&password=${password}`
       ).then((response) => {
         response.json();
       });
