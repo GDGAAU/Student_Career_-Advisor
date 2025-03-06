@@ -1,0 +1,98 @@
+ 
+  .cardContainer {
+    perspective: 1000px;
+    margin-top: 3px;
+  }
+  
+  .card {
+    width: 380px;
+    height: 470px;
+    position: relative;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;}
+   
+  .card.flipped {
+    transform: rotateY(180deg);
+  }
+  
+  .front, .back {
+    position: absolute;
+    width: 90%;
+    height: 100%;
+    backface-visibility: hidden; /* Ensures the back side is hidden when flipped */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    padding: 15px 20px 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .front {
+    margin-top: 50px;
+    z-index: 2;
+    height: 250px; /* Keeps the front side on top when not flipped */
+  }
+  
+  .back {
+    margin-top: -2px;
+    transform: rotateY(180deg); 
+    z-index: 2;/* Flips the back side */
+  }
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+
+
+  /* Optional styles for form elements */
+.input {
+    width: 95%;
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative;
+  }
+  .form label{
+    font-weight: 500;
+    padding-top: 2px;
+  }
+  
+  .submitbtn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #25a129;
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+    margin:22px 0 5px;
+  }
+  
+  .submitbtn:hover {
+    background-color: #1b821e;
+    transform: scale(1.04);
+  }
+  
+  .h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 25px;
+  }
+  
+  .span {
+    color: #007bff;
+    cursor: pointer;
+  }
+  
+  .span:hover {
+    text-decoration: underline;
+  }
+
+
+
+  

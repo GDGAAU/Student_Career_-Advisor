@@ -74,6 +74,20 @@
     background-color: white;
     border-radius: 2px;
 }
+.popup {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+     display: flex;
+    justify-content: center; 
+    /* align-items:calc(50%-20.15rem); */
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
