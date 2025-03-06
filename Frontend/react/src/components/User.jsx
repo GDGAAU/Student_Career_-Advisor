@@ -269,7 +269,7 @@ function User() {
                   <input
                     className={styles.input}
                     type={showPassword ? "text" : "password"}
-                    name="password"
+                    name="confirmPassword"
                     value={userLoginData.confirmPassword}
                     required
                     style={{ paddingRight: "2.5rem" }}
