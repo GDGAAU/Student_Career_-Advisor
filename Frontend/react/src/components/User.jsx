@@ -9,6 +9,8 @@ function User() {
   // Set `isFlipped` to `true` to show the "Sign Up" form first
   const [isFlipped, setIsFlipped] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [wrongCredential, setWrongCredential] = useState(false);
+  const [differentPassword, setDifferentPassword] = useState(false);
   const { user, login, signup, userLoginData, setUserLoginData } =
     useContext(LoginContext);
   const handleFlip = () => {
@@ -91,16 +93,26 @@ function User() {
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
-    login({ email: userLoginData.email, password: userLoginData });
-    if (user) {
+    const newUser = login({
+      email: userLoginData.email,
+      password: userLoginData,
+    });
+    if (newUser.status === 0) {
       navigate("/");
+    } else {
+      setWrongCredential(true);
     }
   };
 
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
-    signup(userLoginData);
-    if (user){
+    if (userLoginData.confirmPassword === userLoginData.password) {
+      signup(userLoginData);
+    } else {
+      setDifferentPassword(true);
+      return;
+    }
+    if (user) {
       navigate("/");
     }
   };
@@ -151,6 +163,11 @@ function User() {
                       alignItems: "center",
                     }}
                   >
+                    {wrongCredential && (
+                      <p style={{ color: "red" }}>
+                        You entered wrong email or password!
+                      </p>
+                    )}
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
                       style={{ color: "black" }}
@@ -202,7 +219,7 @@ function User() {
                 <input
                   type="text"
                   name="firstName"
-                  value={userLoginData.firstName}
+                  value={userLoginData.fName}
                   onChange={handleChangeLogin}
                   className={styles.input}
                   required
@@ -214,7 +231,7 @@ function User() {
                 <input
                   type="text"
                   name="lastName"
-                  value={userLoginData.lastName}
+                  value={userLoginData.lName}
                   onChange={handleChangeLogin}
                   className={styles.input}
                   required
@@ -269,8 +286,9 @@ function User() {
                   <input
                     className={styles.input}
                     type={showPassword ? "text" : "password"}
-                    name="password"
+                    name="confirmPassword"
                     value={userLoginData.confirmPassword}
+                    onChange={handleChangeLogin}
                     required
                     style={{ paddingRight: "2.5rem" }}
                   />
@@ -284,6 +302,11 @@ function User() {
                       alignItems: "center",
                     }}
                   >
+                    {differentPassword && (
+                      <p style={{ color: "red" }}>
+                        Passwords must be the same!
+                      </p>
+                    )}
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
                       style={{ color: "black" }}
