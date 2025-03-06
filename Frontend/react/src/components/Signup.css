@@ -1,0 +1,90 @@
+/* Apply a gray background */
+
+body {
+    background-color: #f3f4f6; /* Tailwind Gray-100 */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  /* Signup container */
+  .signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Signup box */
+  .signup-box {
+    background: #ffffff; /* White background */
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+    margin: 2rem;
+  }
+  
+  .signup-box h2 {
+    color: #1f2937;
+  }
+
+  /* Form inputs */
+  .signup-container .input-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .signup-container .input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #374151; /* Tailwind Gray-700 */
+  }
+  
+  .signup-container .input-group input,
+  .signup-container .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #9ca3af; /* Tailwind Gray-400 */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9fafb; /* Tailwind Gray-50 */
+    color: #1f2937; /* Tailwind Gray-900 */
+  }
+  
+  .signup-container .input-group input:focus,
+  .signup-container .input-group select:focus {
+    outline: none;
+    border-color: #6b7280; /* Tailwind Gray-500 */
+    box-shadow: 0 0 5px rgba(107, 114, 128, 0.3);
+  }
+  
+  /* Signup button */
+  .signup-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4b5563; /* Tailwind Gray-600 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .signup-button:hover {
+    background-color: #374151; /* Tailwind Gray-700 */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 400px) {
+    .signup-box {
+      width: 90%;
+      padding: 20px;
+    }
+  }
+  
