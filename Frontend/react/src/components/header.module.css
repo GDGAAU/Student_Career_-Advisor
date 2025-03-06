@@ -1,7 +1,10 @@
 .mainHeader {
-    background-color: #032a0c;
+    background-color: #031207;
     color: #ffffff;
     padding: 10px 20px;
+    opacity: 0.9;
+    position:sticky;
+    top: 0;
 }
 
 .container {
