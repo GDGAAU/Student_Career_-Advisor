@@ -1,7 +1,7 @@
 .formCareerRequest {
   max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
+  margin: 40px auto;
+  padding: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
@@ -11,7 +11,10 @@
 .formCareerRequest form {
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 70px;
+}
+.formSelect{
+  padding: 6px;
 }
 
 .formSection {
