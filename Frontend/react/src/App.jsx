@@ -7,6 +7,9 @@ import Header from "./components/Header.jsx";
 import FormCareerRequest from "./components/FormCareerRequest.jsx";
 import User from "./components/User.jsx";
 import Footer from "./components/Footer.jsx";
+import Chatroom from "./components/chatroom.jsx";
+import Dashboard from "./components/Dashboard.jsx";
+import Contact from "./components/Contact.jsx";
 
 function App() {
   return (
@@ -17,6 +20,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<User />} />
         <Route path="/form" element={<FormCareerRequest />} /> 
+        <Route path="/chatroom" element={<Chatroom/>} /> 
+        <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/contact" element={<Contact/>} />
+
         
       </Routes>
       <Footer/>

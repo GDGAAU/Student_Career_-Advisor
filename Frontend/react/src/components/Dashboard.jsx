@@ -3,32 +3,41 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import Home from './Home.jsx';
 import JobSkills from './JobSkills.jsx';
 import Analytics from './Analytics.jsx';
-import './Dashboard.css';
+import styles from './Dashboard.module.css';
 import { FaHome, FaTools, FaChartLine } from 'react-icons/fa';
 
 const Dashboard = () => {
     return (
-        <div className="dashboard">
-            <nav className="sidebar">
-                <ul>
-                    <li>
-                        <NavLink to="/dashboard/home" activeClassName="active">
-                            <FaHome className="icon" /> Home
+        <div className={styles.dashboard}>
+            <nav className={styles.sidebar}>
+                <ul className={styles.sidebarList}>
+                    <li className={styles.sidebarItem}>
+                        <NavLink
+                            to="/dashboard/home"
+                            className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
+                        >
+                            <FaHome className={styles.icon} /> Home
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/job-skills" activeClassName="active">
-                            <FaTools className="icon" /> Job Skills
+                    <li className={styles.sidebarItem}>
+                        <NavLink
+                            to="/dashboard/job-skills"
+                            className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
+                        >
+                            <FaTools className={styles.icon} /> Job Skills
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/analytics" activeClassName="active">
-                            <FaChartLine className="icon" /> Analytics
+                    <li className={styles.sidebarItem}>
+                        <NavLink
+                            to="/dashboard/analytics"
+                            className={({ isActive }) => isActive ? `${styles.navLink} ${styles.active}` : styles.navLink}
+                        >
+                            <FaChartLine className={styles.icon} /> Analytics
                         </NavLink>
                     </li>
                 </ul>
             </nav>
-            <div className="main-content">
+            <div className={styles.mainContent}>
                 <Routes>
                     <Route path="home" element={<Home />} />
                     <Route path="job-skills" element={<JobSkills />} />
@@ -40,3 +49,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

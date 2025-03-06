@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./home.module.css"; // Importing modular CSS file
+import FloatingButton from "./FloatingButton";
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
             Our AI-driven platform helps you discover your ideal career based on your skills, interests, and goals.
           </p>
           <Link to="/signup" className={styles.ctaButton}>Get Started</Link>
+          <FloatingButton/>
         </div>
       </header>
 

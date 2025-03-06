@@ -1,0 +1,71 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background-color: #f4f4f9;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    color: #333333;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebarList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebarItem {
+    margin: 15px 0; /* Reduced margin to ensure balance */
+    border: 1px solid #e0e0e0; /* Border around each item */
+    border-radius: 5px; /* Rounded edges */
+    overflow: hidden; /* Prevents content overflow */
+    transition: transform 0.2s ease; /* Adds a hover animation */
+}
+
+.sidebarItem:hover {
+    transform: translateX(10px); /* Move slightly to the right on hover */
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); /* Elevate the item visually */
+}
+
+.navLink {
+    color: #333333;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #ffffff; /* Add a default background for links */
+}
+
+.navLink:hover,
+.active {
+    background-color: #4caf50;
+    color: #ffffff;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15); /* Shadow on hover/active state */
+}
+
+.icon {
+    margin-right: 10px;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mainHeading {
+    margin-top: 0;
+}
+

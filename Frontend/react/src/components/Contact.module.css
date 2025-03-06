@@ -17,29 +17,29 @@
     text-align: center;
 }
 
-.contact h1 {
+.contactTitle {
     margin-bottom: 10px;
     color: #333333;
 }
 
-.description {
+.contactDescription {
     margin-bottom: 20px;
     color: #666666;
     font-size: 16px;
 }
 
-.contact-form {
+.contactForm {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.form-group {
+.formGroup {
     margin-bottom: 20px;
     width: 100%;
 }
 
-.form-group label {
+.formLabel {
     margin-bottom: 5px;
     display: block;
     color: #333333;
@@ -47,8 +47,7 @@
     text-align: left;
 }
 
-.form-group input,
-.form-group textarea {
+.formInput {
     width: 100%;
     padding: 10px;
     border: 1px solid #dddddd;
@@ -57,17 +56,16 @@
     color: #333333;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
+.formInputPlaceholder {
     color: #aaaaaa;
 }
 
-.form-group textarea {
+.formTextarea {
     resize: vertical;
     height: 150px;
 }
 
-.contact-form button {
+.submitButton {
     padding: 15px 20px;
     border: none;
     border-radius: 5px;
@@ -79,6 +77,6 @@
     width: 100%;
 }
 
-button:hover {
+.submitButtonHover:hover {
     background-color: #388e3c;
 }
