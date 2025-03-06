@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./header.module.css"; // Import CSS module
+import User from "./User";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,6 +9,7 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
 
   return (
     <header className={styles.mainHeader}>
@@ -16,11 +19,17 @@ const Header = () => {
             <h1>AI Career Advisor</h1>
           </div>
           <div className={`${styles.navMenu} ${isMenuOpen ? styles.open : ""}`}>
-            <ul className={styles.navLinks}>
-              <li><a href="features">Features</a></li>
-              <li><a href="signup">Sign Up</a></li>
-              <li><a href="contact">Contact</a></li>
-            </ul>
+        <ul className={styles.navLinks}>
+                <li>
+                    <Link to="/features">Features</Link>
+                </li>
+                <li>
+                    <Link to="/signup">Sign Up</Link>
+                </li>
+                <li>
+                    <Link to="/contact">Contact</Link>
+                </li>
+        </ul>
           </div>
           <button className={styles.menuToggle} onClick={toggleMenu}>
             <span className={styles.menuBar}></span>

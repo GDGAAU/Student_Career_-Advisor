@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./home.module.css"; // Importing modular CSS file
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
           <p className={styles.heroDescription}>
             Our AI-driven platform helps you discover your ideal career based on your skills, interests, and goals.
           </p>
-          <a href="#signup" className={styles.ctaButton}>Get Started</a>
+          <Link to="/signup" className={styles.ctaButton}>Get Started</Link>
         </div>
       </header>
 
@@ -41,16 +42,9 @@ function Home() {
           <p className={styles.ctaDescription}>
             Sign up now and let AI guide your career journey!
           </p>
-          <a href="#signup-form" className={styles.ctaButton}>Sign Up Now</a>
+          <Link to="/signup" className={styles.ctaButton}>Sign Up Now</Link>
         </div>
       </section>
-
-      {/* Footer Section */}
-      <footer className={styles.footer}>
-        <div className={styles.container}>
-          <p>&copy; 2025 AI Career Advisor. All Rights Reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 }
