@@ -1,151 +1,202 @@
-import React, { useState } from 'react';
-import styles from './User.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import React, { useContext, useState } from "react";
+import styles from "./User.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { LoginContext } from "../contexts/LoginContext";
+import { useNavigate } from "react-router-dom";
 
 function User() {
   // Set `isFlipped` to `true` to show the "Sign Up" form first
-  const [isFlipped, setIsFlipped] = useState(true);
+  const [isFlipped, setIsFlipped] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const [wrongCredential, setWrongCredential] = useState(false);
+  const [differentPassword, setDifferentPassword] = useState(false);
+  const { user, login, signup, userLoginData, setUserLoginData } =
+    useContext(LoginContext);
   const handleFlip = () => {
-    setIsFlipped(prevState => !prevState);
+    setIsFlipped((prevState) => !prevState);
   };
-
+  const navigate = useNavigate();
   const togglePasswordVisibility = () => {
-    setShowPassword(prevState => !prevState);
+    setShowPassword((prevState) => !prevState);
   };
-
-
 
   //data from login
-  const [formDataLogin, setFormDataLogin] = useState({
-          emailOrUsername: "",
-          password: "",
-      });
-  
-      const [error, setError] = useState("");
-  
-      const handleChangeLogin = (e) => {
-          setFormData({ ...formDataLogin, [e.target.name]: e.target.value });
-      };
-  
-      const handleSubmitLogin = (e) => {
-          e.preventDefault();
-  
-          // Mock user data from localStorage (replace with backend API in production)
-          const users = JSON.parse(localStorage.getItem("users")) || [];
-  
-          const user = users.find(
-              (u) => u.email === formDataLogin.emailOrUsername || u.username === formDataLogin.emailOrUsername
-          );
-  
-          if (!user) {
-              setError("User not found!");
-              return;
-          }
-  
-          if (user.password !== formDataLogin.password) {
-              setError("Incorrect password!");
-              return;
-          }
-  
-          // alert("Login successful!");
-          // window.location.href = "/dashboard"; // Redirect to dashboard
-      };
 
-
-
-
-
-  // data from signup
-  const [formData, setFormData] = useState({
-    email: "",
-    username: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    userType: "student",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChangeLogin = (e) => {
+    switch (e.target.name) {
+      case "email": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            email: e.target.value,
+          };
+        });
+        break;
+      }
+      case "password": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            password: e.target.value,
+          };
+        });
+        break;
+      }
+      case "confirmPassword": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            confirmPassword: e.target.value,
+          };
+        });
+        break;
+      }
+      case "username": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            username: e.target.value,
+          };
+        });
+        break;
+      }
+      case "firstName": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            fName: e.target.value,
+          };
+        });
+        break;
+      }
+      case "lastName": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            lName: e.target.value,
+          };
+        });
+        break;
+      }
+      case "userType": {
+        setUserLoginData((prev) => {
+          return {
+            ...prev,
+            userType: e.target.value,
+          };
+        });
+        break;
+      }
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmitLogin = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    const newUser = login({
+      email: userLoginData.email,
+      password: userLoginData,
+    });
+    if (newUser.status === 0) {
+      navigate("/");
+    } else {
+      setWrongCredential(true);
+    }
   };
 
-
+  const handleSubmitSignUp = (e) => {
+    e.preventDefault();
+    if (userLoginData.confirmPassword === userLoginData.password) {
+      signup(userLoginData);
+    } else {
+      setDifferentPassword(true);
+      return;
+    }
+    if (user) {
+      navigate("/");
+    }
+  };
 
   return (
     <div className={styles.User}>
       <div className={styles.cardContainer}>
-        <div className={`${styles.card} ${isFlipped ? styles.flipped : ''}`}>
-         
+        <div className={`${styles.card} ${isFlipped ? styles.flipped : ""}`}>
           <div className={styles.front}>
             <h2 className={styles.h2}>Login</h2>
             <form className={styles.form} onSubmit={handleSubmitLogin}>
               <div className={styles.inputGroup}>
                 <label className={styles.label}>Email or Username:</label>
                 <input
-                    type="text"
-                    name="emailOrUsername"
-                    value={formData.emailOrUsername}
-                    onChange={handleChangeLogin}
-                    required
-                    className={styles.input}
+                  type="text"
+                  name="email"
+                  value={userLoginData.email}
+                  onChange={handleChangeLogin}
+                  required
+                  className={styles.input}
                 />
-            </div>
+              </div>
               <div>
                 <label>Password:</label>
-                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <input
                     className={styles.input}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
-                    value={formDataLogin.password}
+                    value={userLoginData.password}
                     onChange={handleChangeLogin}
                     required
-                    style={{ paddingRight: '2.5rem' }}
+                    style={{ paddingRight: "2.5rem" }}
                   />
                   <span
                     onClick={togglePasswordVisibility}
                     style={{
-                      position: 'absolute',
-                      right: '0.5rem',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
+                      position: "absolute",
+                      right: "0.5rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
+                    {wrongCredential && (
+                      <p style={{ color: "red" }}>
+                        You entered wrong email or password!
+                      </p>
+                    )}
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
-                      style={{ color: 'black' }}
+                      style={{ color: "black" }}
                     />
                   </span>
                 </div>
               </div>
-              <button type="submit" className={styles.submitbtn}>Login</button>
+              <button type="submit" className={styles.submitbtn}>
+                Login
+              </button>
             </form>
             <p>
-              Don't have an account? <span className={styles.span} onClick={handleFlip}>Sign up</span>
+              Don't have an account?{" "}
+              <span className={styles.span} onClick={handleFlip}>
+                Sign up
+              </span>
             </p>
           </div>
 
-          
           <div className={styles.back}>
             <h2 className={styles.h2}>Sign Up</h2>
-            <form className={styles.form} onSubmit={handleSubmit}>
-
+            <form className={styles.form} onSubmit={handleSubmitSignUp}>
               <div className={styles.inputGroup}>
                 <label>Username: </label>
                 <input
                   type="text"
                   name="username"
-                  value={formData.username}
-                  onChange={handleChange}
+                  value={userLoginData.username}
+                  onChange={handleChangeLogin}
                   className={styles.input}
                   required
                 />
@@ -156,8 +207,8 @@ function User() {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={userLoginData.email}
+                  onChange={handleChangeLogin}
                   className={styles.input}
                   required
                 />
@@ -168,8 +219,8 @@ function User() {
                 <input
                   type="text"
                   name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
+                  value={userLoginData.fName}
+                  onChange={handleChangeLogin}
                   className={styles.input}
                   required
                 />
@@ -180,8 +231,8 @@ function User() {
                 <input
                   type="text"
                   name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
+                  value={userLoginData.lName}
+                  onChange={handleChangeLogin}
                   className={styles.input}
                   required
                 />
@@ -189,28 +240,35 @@ function User() {
 
               <div>
                 <label>Password:</label>
-                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <input
-                    onChange={handleChange}
+                    onChange={handleChangeLogin}
                     className={styles.input}
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     name="password"
+                    value={userLoginData.password}
                     required
-                    style={{ paddingRight: '2.5rem' }}
+                    style={{ paddingRight: "2.5rem" }}
                   />
                   <span
                     onClick={togglePasswordVisibility}
                     style={{
-                      position: 'absolute',
-                      right: '0.5rem',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
+                      position: "absolute",
+                      right: "0.5rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
-                      style={{ color: 'black' }}
+                      style={{ color: "black" }}
                     />
                   </span>
                 </div>
@@ -218,27 +276,40 @@ function User() {
 
               <div>
                 <label>Repeat Password:</label>
-                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                <div
+                  style={{
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <input
                     className={styles.input}
-                    type={showPassword ? 'text' : 'password'}
-                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    value={userLoginData.confirmPassword}
+                    onChange={handleChangeLogin}
                     required
-                    style={{ paddingRight: '2.5rem' }}
+                    style={{ paddingRight: "2.5rem" }}
                   />
                   <span
                     onClick={togglePasswordVisibility}
                     style={{
-                      position: 'absolute',
-                      right: '0.5rem',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
+                      position: "absolute",
+                      right: "0.5rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
                     }}
                   >
+                    {differentPassword && (
+                      <p style={{ color: "red" }}>
+                        Passwords must be the same!
+                      </p>
+                    )}
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
-                      style={{ color: 'black' }}
+                      style={{ color: "black" }}
                     />
                   </span>
                 </div>
@@ -248,20 +319,31 @@ function User() {
                 <label className={styles.label}>User Type</label>
                 <select
                   name="userType"
-                  value={formData.userType}
-                  onChange={handleChange}
+                  value={userLoginData.userType}
+                  onChange={handleChangeLogin}
                   className={styles.input}
                 >
-                  <option value="student" className={styles.option}>Student</option>
-                  <option value="jobSeeker" className={styles.option}>Job Seeker</option>
-                  <option value="counselor" className={styles.option}>Career Counselor</option>
+                  <option value="student" className={styles.option}>
+                    Student
+                  </option>
+                  <option value="job seeker" className={styles.option}>
+                    Job Seeker
+                  </option>
+                  <option value="counselor" className={styles.option}>
+                    Career Counselor
+                  </option>
                 </select>
               </div>
 
-              <button type="submit" className={styles.submitbtn}>Sign up</button>
+              <button type="submit" className={styles.submitbtn}>
+                Sign up
+              </button>
             </form>
             <p>
-              Already have an account? <span className={styles.span} onClick={handleFlip}>Login</span>
+              Already have an account?{" "}
+              <span className={styles.span} onClick={handleFlip}>
+                Login
+              </span>
             </p>
           </div>
         </div>
