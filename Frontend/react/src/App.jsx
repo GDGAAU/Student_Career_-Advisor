@@ -1,7 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from "./components/SignUP.jsx";
-import Login from "./components/Login.jsx";
 import Home from "./components/Home.jsx";
 import Header from "./components/Header.jsx";
 import FormCareerRequest from "./components/FormCareerRequest.jsx";
