@@ -3,6 +3,7 @@ import { useState, createContext } from "react";
 const LoginContext = createContext(null);
 
 function LoginProvider({ children }) {
+  const [token,setToken] = useState("")
   const [user, setUser] = useState(null);
   const [userLoginData, setUserLoginData] = useState({
     email: "",
@@ -15,11 +16,18 @@ function LoginProvider({ children }) {
   });
   function login({ email, password }) {
     const fetchUser = async () => {
-      const result = await fetch(
-        `/login?email=${email}&password=${password}`
-      ).then((response) => {
-        response.json();
-      });
+      let result;
+      try {
+        result = await fetch(
+          `/login?email=${email}&password=${password}`
+        ).then((response) => {
+          setToken(response.data.access_token)
+          localStorage.setItem('token', response.data.access_token);
+          response.json();
+        });
+    } catch (error) {
+        console.error("Error logging in", error);
+    }
       if (result.ok) {
         return { user: result, status: 0 };
       } else {
@@ -66,7 +74,7 @@ function LoginProvider({ children }) {
 
   return (
     <LoginContext.Provider
-      value={{ user, login, signup, userLoginData, setUserLoginData }}
+      value={{ user, login, signup, token, userLoginData, setUserLoginData }}
     >
       {children}
     </LoginContext.Provider>
