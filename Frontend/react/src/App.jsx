@@ -6,6 +6,7 @@ import Home from "./components/Home.jsx";
 import Header from "./components/Header.jsx";
 import FormCareerRequest from "./components/FormCareerRequest.jsx";
 import User from "./components/User.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/form" element={<FormCareerRequest />} /> 
         
       </Routes>
+      <Footer/>
     </Router>
   );
 }
