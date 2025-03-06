@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
 import styles from "./header.module.css"; // Import CSS module
-import User from "./User";
 
-const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Header = ({ isAuthenticated }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu toggle
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
 
   return (
     <header className={styles.mainHeader}>
@@ -19,17 +18,22 @@ const Header = () => {
             <h1>AI Career Advisor</h1>
           </div>
           <div className={`${styles.navMenu} ${isMenuOpen ? styles.open : ""}`}>
-        <ul className={styles.navLinks}>
-                <li>
-                    <Link to="/features">Features</Link>
-                </li>
-                <li>
-                    <Link to="/signup">Sign Up</Link>
-                </li>
-                <li>
-                    <Link to="/contact">Contact</Link>
-                </li>
-        </ul>
+            <ul className={styles.navLinks}>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/chat">Chat</Link></li>
+              <li><Link to="/analytics">Analytics</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+              <div className={styles.authLinks}>
+                {isAuthenticated ? (
+                  <li><Link to="/profile"><FaUserCircle className={styles.profileIcon} /></Link></li>
+                ) : (
+                  <>
+                    <li><Link to="/signup">Sign Up</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                  </>
+                )}
+              </div>
+            </ul>
           </div>
           <button className={styles.menuToggle} onClick={toggleMenu}>
             <span className={styles.menuBar}></span>
@@ -43,4 +47,3 @@ const Header = () => {
 };
 
 export default Header;
-
