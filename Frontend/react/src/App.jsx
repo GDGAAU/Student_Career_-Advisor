@@ -10,7 +10,7 @@ import { ChatProvider } from "./contexts/ChatContext.jsx";
 import Chatroom from "./components/chatroom.jsx";
 import Contact from "./components/Contact.jsx";
 import Profile from "./components/Profile.jsx";
-import CareerMarketVisualization from "./components/CareerMarketVisualization.jsx";
+// import CareerMarketVisualization from "./components/CareerMarketVisualization.jsx";
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
         <Route path="/chat" element={<Chatroom />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/analytics" element={<CareerMarketVisualization />} />
+        {/* <Route path="/analytics" element={<CareerMarketVisualization />} /> */}
       </Routes>
       <Footer/>
     </Router>
