@@ -205,6 +205,7 @@ const FormCareerRequest = () => {
             </div>
           </div>
         </div>
+        <button className={styles.submitButton} type="submit">Submit</button>
       </form>
     </div>
   );

@@ -25,6 +25,7 @@ const Header = () => {
               <li><Link to="/chat">Chat</Link></li>
               <li><Link to="/analytics">Analytics</Link></li>
               <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/consultance">Get Consultance</Link></li>
               <div className={styles.authLinks}>
                 {user ? (
                   <li><Link to="/profile"><FaUserCircle className={styles.profileIcon} /></Link></li>

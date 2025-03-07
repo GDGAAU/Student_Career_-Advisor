@@ -1,17 +1,21 @@
 .formCareerRequest {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 30px 40px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #ededed;
 }
 
 .formCareerRequest form {
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 70px;
+}
+.formSelect{
+  padding: 6px;
 }
 
 .formSection {
@@ -20,7 +24,7 @@
 }
 
 .formGroup {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .optionStyle {
@@ -36,11 +40,12 @@
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
+  font-size: 17px;
 }
 
 .formInput {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -78,5 +83,38 @@
   display: flex;
   gap: 20px;
 }
+.radioGroup label{
+  margin-left: 10px;
+}
+.radioGroup input[type="radio"] {
+  width: 12px; /* Adjust the width */
+  height: 12px; /* Adjust the height */
+  transform: scale(1.5); /* Scales the button for better visibility */
+  margin-right: 5px; /* Adds spacing between the button and label */
+}
+.submitButton {
+  margin-top: -55px;
+  display: inline-block;
+  padding: 10px 22px;
+  background-color: #04170d; /* A nice blue color */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
 
-  
+.submitButton:hover {
+  background-color: #3c4146; /* Darker blue on hover */
+}
+
+.submitButton:active {
+  background-color: #0b3125; /* Even darker blue on click */
+}
+
+.submitButton:disabled {
+  background-color: #cccccc; /* Gray when disabled */
+  cursor: not-allowed; /* Disabled cursor */
+}
