@@ -5,7 +5,7 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
-  background-color: #ededed;
+  background-color: #eeeeee;
 }
 
 .formCareerRequest form {
@@ -19,7 +19,7 @@
 }
 
 .formSection {
-  min-width: 200px;
+  min-width: 220px;
   margin-bottom: 20px;
 }
 

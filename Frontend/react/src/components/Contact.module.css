@@ -22,7 +22,7 @@
 }
 
 .contactDescription {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     color: #666666;
     font-size: 16px;
 }
@@ -35,20 +35,33 @@
 
 .formGroup {
     margin-bottom: 20px;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: flex-start;
+
 }
 
 .formLabel {
     margin-bottom: 5px;
+    margin-right: 10px;
     display: block;
     color: #333333;
     font-weight: bold;
 }
 
+.formInput::placeholder {
+    text-align: center; /* Centers the placeholder text */
+}
+
+.formTextarea::placeholder {
+    text-align: center; /* Centers the placeholder text for textareas */
+}
+
 .formInput {
     width: 100%;
     padding: 10px;
-    border: 1px solid #dddddd;
+    border: 1px solid #818181;
     border-radius: 5px;
     font-size: 16px;
     color: #333333;
@@ -60,7 +73,7 @@
 
 .formTextarea {
     resize: vertical;
-    height: 150px;
+    height: 120px;
 }
 
 .submitButton {

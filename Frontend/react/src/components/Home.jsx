@@ -14,7 +14,10 @@ function Home() {
             Our AI-driven platform helps you discover your ideal career based on your skills, interests, and goals.
           </p>
           <Link to="/signup" className={styles.ctaButton}>Get Started</Link>
-          <FloatingButton/>
+          <Link to="/chat">
+            <FloatingButton/>
+          </Link>
+          
         </div>
       </header>
 
