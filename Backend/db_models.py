@@ -9,7 +9,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=True)
     password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    user_type= db.COlumn(db.String(30), nullable=False)
+    user_type= db.Column(db.String(30), nullable=False)
 
     def to_json(self):
         return {
@@ -24,7 +24,7 @@ class User(db.Model):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    content = db.Column(JSONB, nullable=False)
+    content = db.Column(db.String(200), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def to_json(self):

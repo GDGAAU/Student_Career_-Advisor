@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import styles from "./header.module.css"; // Import CSS module
+import { LoginContext } from "../contexts/LoginContext";
 
-const Header = ({ isAuthenticated }) => {
+const Header = () => {
+  const {user}=useContext(LoginContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu toggle
 
   const toggleMenu = () => {
@@ -25,12 +27,11 @@ const Header = ({ isAuthenticated }) => {
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/consultance">Get Consultance</Link></li>
               <div className={styles.authLinks}>
-                {isAuthenticated ? (
+                {user ? (
                   <li><Link to="/profile"><FaUserCircle className={styles.profileIcon} /></Link></li>
                 ) : (
                   <>
-                    <li><Link to="/signup">Sign Up</Link></li>
-                    <li><Link to="/login">Login</Link></li>
+                    <li><Link to="/signup">Sign Up/Log In</Link></li>
                   </>
                 )}
               </div>

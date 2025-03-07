@@ -95,7 +95,7 @@ function User() {
     e.preventDefault();
     const newUser = login({
       email: userLoginData.email,
-      password: userLoginData,
+      password: userLoginData.password,
     });
     if (newUser.status === 0) {
       navigate("/");
@@ -107,6 +107,7 @@ function User() {
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
     if (userLoginData.confirmPassword === userLoginData.password) {
+      console.log(JSON.stringify(userLoginData))
       signup(userLoginData);
     } else {
       setDifferentPassword(true);
@@ -320,6 +321,7 @@ function User() {
                 <select
                   name="userType"
                   value={userLoginData.userType}
+                  defaultValue={"student"}
                   onChange={handleChangeLogin}
                   className={styles.input}
                 >

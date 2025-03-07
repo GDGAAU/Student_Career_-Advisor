@@ -21,18 +21,18 @@ def getResource(subpath):
     if not subpath: return jsonify({"error: resource not found"}),404
     return send_from_directory(app.static_folder, subpath)
 
-@app.route("/create-account")
+@app.route("/create-account", methods=["POST"])
 def signup():
-    data = request.json()
+    data = request.get_json()
     username = data.get("username")
     email = data.get("email")
-    fname = data["fName"]
-    lname = data["lName"]
-    password = data["password"]
+    fname = data.get("fName")
+    lname = data.get("lName")
+    password = data.get("password")
     userType =data.get("userType")
     
     user = User(username= username,
-                firstName = fname, 
+                first_name = fname, 
                 last_name = lname,
                 email= email,
                 password =password,
@@ -49,16 +49,21 @@ def signup():
     user = User.query.filter_by(email=email).first()
     access_token = create_access_token(identity=username)
     return jsonify({"user":user.to_json(),'message': 'Account has been created successfully!'},access_token=access_token), 201
-@app.route("/login")
+@app.route("/login", methods=["POST"])
 def login():
-    email = request.args.get("email")
-    password = request.args.get("password")
-
-    user_by_email = User.query.filter_by(email=email,password=password)
-    user_by_username = User.query.filter_by(username = email, password= password)
-    user = user_by_email or user_by_username
-    access_token = create_access_token(identity=user.username)
-    return (jsonify(user.to_json(), access_token = access_token), 200) if user else jsonify({"error":"wrong credentials",}),401
+    data =request.get_json()
+    print( "this is received data: ", data)
+    email = data.get("email")
+    password = data.get("password")
+    user_by_email = User.query.filter_by(email=email, password=password).first()
+    # user_by_username = User.query.filter_by(username=email, password=password).first()
+    if user_by_email:
+        # User found, create access token
+        access_token = create_access_token(identity=user_by_email.username)
+        return jsonify(access_token=access_token), 200  # You can return any other user data if needed
+    else:
+        # User not found, return error message
+        return jsonify(message="Invalid email or password"), 401
 
 
 @app.route("/chat-service", methods=["POST"])
@@ -70,8 +75,8 @@ def ask_model():
     response = model.ask_gemini_text(question.get('parts'))
     if(currentUser):
         user = User.query.filter_by(username=currentUser)
-        user_question = Message(content=question, user_id=user.id)
-        model_response = Message(content=response, user_id=user.id)
+        user_question = Message(content=str(question), user_id=user.id)
+        model_response = Message(content=str(response), user_id=user.id)
         db.session.add(user_question)
         db.session.add(model_response)
         db.session.commit()        
@@ -87,3 +92,12 @@ def get_identity_from_token():
         return payload.get("sub") 
     except Exception:
         return None
+    
+@app.route("/get-messages",methods=["GET"])
+@jwt_required()
+def get_messages():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(username=current_user).first
+    messages = Message.query.filter_by(user_id = user.id).all
+
+    return jsonify([message.to_json() for message in messages])
