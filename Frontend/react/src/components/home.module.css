@@ -19,7 +19,7 @@
 
 /* Hero Section */
 .hero {
-    background: #4caf50;
+    background: #0d4b8d;
     color: white;
     padding: 80px 0;
     text-align: center;
@@ -37,7 +37,7 @@
 
 .ctaButton {
     background-color: #fff;
-    color: #4caf50;
+    color: #007bff;
     padding: 15px 30px;
     border-radius: 25px;
     font-weight: bold;
@@ -47,7 +47,7 @@
 }
 
 .ctaButton:hover {
-    background-color: #45a049;
+    background-color: #00050a;
 }
 
 /* Features Section */
@@ -78,7 +78,7 @@
 
 /* Call to Action Section */
 .ctaSection {
-    background-color: #4caf50;
+    background-color: #0d4b8d;
     color: white;
     text-align: center;
     padding: 60px 0;

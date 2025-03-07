@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./form.module.css"; // Import modular CSS
+import JobList from "./ResponseList";
 
 const FormCareerRequest = () => {
   const [showInput, setShowInput] = useState(false);
@@ -45,6 +46,7 @@ const FormCareerRequest = () => {
   };
 
   return (
+    <div>
     <div className={styles.formCareerRequest}>
       <form>
         <div className={styles.formSection}>
@@ -207,6 +209,9 @@ const FormCareerRequest = () => {
         </div>
         <button className={styles.submitButton} type="submit">Submit</button>
       </form>
+    </div>
+
+    <JobList/>
     </div>
   );
 };

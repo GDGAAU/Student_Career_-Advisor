@@ -1,5 +1,5 @@
 .mainHeader {
-    background-color: #031207;
+    background-color: #020200;
     color: #ffffff;
     padding: 10px 20px;
     opacity: 0.9;
@@ -53,7 +53,7 @@
 }
 
 .navLinks a:hover {
-    color: #4caf50;
+    color:  #4997eb;
 }
 
 .authLinks {
@@ -70,7 +70,7 @@
 }
 
 .profileIcon:hover {
-    color: #4caf50;
+    color: #1d7ade;
 }
 
 .menuToggle {
