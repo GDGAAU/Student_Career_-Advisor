@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function User() {
   // Set `isFlipped` to `true` to show the "Sign Up" form first
   const [isFlipped, setIsFlipped] = useState(false);
+  const [userExist, setUserExist] =useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [wrongCredential, setWrongCredential] = useState(false);
   const [differentPassword, setDifferentPassword] = useState(false);
@@ -97,8 +98,10 @@ function User() {
       email: userLoginData.email,
       password: userLoginData.password,
     });
-    if (newUser.status === 0) {
+    console.log("login return: ",JSON.stringify(newUser))
+    if (newUser) {
       navigate("/");
+      return;
     } else {
       setWrongCredential(true);
     }
@@ -107,8 +110,11 @@ function User() {
   const handleSubmitSignUp = (e) => {
     e.preventDefault();
     if (userLoginData.confirmPassword === userLoginData.password) {
-      console.log(JSON.stringify(userLoginData))
-      signup(userLoginData);
+      const result = signup(userLoginData);
+      if(result.status === 1){
+        setUserExist(true);
+        return;
+      }
     } else {
       setDifferentPassword(true);
       return;
@@ -164,17 +170,18 @@ function User() {
                       alignItems: "center",
                     }}
                   >
-                    {wrongCredential && (
-                      <p style={{ color: "red" }}>
-                        You entered wrong email or password!
-                      </p>
-                    )}
+                    
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
                       style={{ color: "black" }}
                     />
                   </span>
                 </div>
+                {wrongCredential && (
+                      <p style={{ color: "red" }}>
+                        You entered wrong email or password!
+                      </p>
+                    )}
               </div>
               <button type="submit" className={styles.submitbtn}>
                 Login
@@ -214,7 +221,7 @@ function User() {
                   required
                 />
               </div>
-
+              { userExist && <p style={{ color:"red", fontSize:"1.5rem" }}>Try other email or username. this one is taken!</p>}
               <div className={styles.inputGroup}>
                 <label className={styles.label}>First Name</label>
                 <input
@@ -303,16 +310,16 @@ function User() {
                       alignItems: "center",
                     }}
                   >
-                    {differentPassword && (
-                      <p style={{ color: "red" }}>
-                        Passwords must be the same!
-                      </p>
-                    )}
                     <FontAwesomeIcon
                       icon={showPassword ? faEyeSlash : faEye}
                       style={{ color: "black" }}
                     />
                   </span>
+                  {differentPassword && (
+                      <p style={{ color: "red" }}>
+                        Passwords must be the same!
+                      </p>
+                    )}
                 </div>
               </div>
 
@@ -321,7 +328,6 @@ function User() {
                 <select
                   name="userType"
                   value={userLoginData.userType}
-                  defaultValue={"student"}
                   onChange={handleChangeLogin}
                   className={styles.input}
                 >

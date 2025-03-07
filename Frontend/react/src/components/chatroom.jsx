@@ -1,55 +1,40 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Chatroom.module.css";
 import { LoginContext } from "../contexts/LoginContext";
 import { ChatContext, ChatProvider } from "../contexts/ChatContext";
 import BeatLoader from "react-spinners/BeatLoader";
 
 const Chatroom = () => {
-//   const { token } = useContext(LoginContext);
-//   const { loadingMessage, chats, sendMessage } = useContext(ChatContext);
-//   const [input, setInput] = useState("");
-//   const [initialChat, setInitialChat] = useState([]);
-//   const handleSendMessage = (e) => {
-//     e.preventDefault();
-//     sendMessage(e.target.value, token);
-//   };
-
-//   useEffect(() => {
-//     const fetchMessages = async () => {
-//       const messages = await fetch("http://127.0.0.1/get-messages", {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/json",
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }).then((response) => {
-//         if (response.ok) {
-//           return { messages: response.json(), status: 0 };
-//         } else {
-//           return { messages: null, status: 1 };
-//         }
-//       });
-//       return { messages: messages, status: messages.status };
-//     };
-//     const messages = fetchMessages();
-//     if (messages.status == 0) {
-//       setInitialChat(messages.messages);
-//     }
-//     return () => {
-//       setInitialChat([]);
-//     };
-//   }, [token]);
-
+  const { token } = useContext(LoginContext);
+  const { loadingMessage, chats, sendMessage } = useContext(ChatContext);
+  const [input, setInput] = useState("");
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+    sendMessage(input, token);
+    setInput("");
+  };
+  function formatText(input) {
+    // Replace double asterisks (**) with <strong> tags  
+    const parts = input.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/); // Split using **bold** and *paragraph*
+  
+  return parts.map((part, index) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>; // Remove **
+    } else if (part.startsWith("*") && part.endsWith("*")) {
+      return <p key={index}>{part.slice(1, -1)}</p>; // Remove *
+    }
+    return part; // Return unformatted text
+  });
+};
   return (
-    <ChatProvider initialChat={initialChat}>
       <div className={styles.chatroom}>
         <div className={styles.chatArea}>
-          {chats.map((msg, index) => (
+          {chats && chats.map((msg, index) => (
             <div
               key={index}
               className={`${styles.message} ${styles[msg.role]}`}
             >
-              {msg.text}
+              <div>{formatText(msg.parts)}</div> 
             </div>
           ))}
           {loadingMessage && <BeatLoader className="message model" />}
@@ -71,7 +56,7 @@ const Chatroom = () => {
           </button>
         </form>
       </div>
-    </ChatProvider>
+
   );
 };
 

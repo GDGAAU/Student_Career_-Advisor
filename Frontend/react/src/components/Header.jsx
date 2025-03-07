@@ -5,7 +5,7 @@ import styles from "./header.module.css"; // Import CSS module
 import { LoginContext } from "../contexts/LoginContext";
 
 const Header = () => {
-  const {user}=useContext(LoginContext)
+  const {token}=useContext(LoginContext)
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu toggle
 
   const toggleMenu = () => {
@@ -27,7 +27,7 @@ const Header = () => {
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/consultance">Get Consultance</Link></li>
               <div className={styles.authLinks}>
-                {user ? (
+                {token ? (
                   <li><Link to="/profile"><FaUserCircle className={styles.profileIcon} /></Link></li>
                 ) : (
                   <>

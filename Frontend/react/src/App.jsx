@@ -6,15 +6,16 @@ import FormCareerRequest from "./components/FormCareerRequest.jsx";
 import User from "./components/User.jsx";
 import Footer from "./components/Footer.jsx";
 import { LoginProvider } from "./contexts/LoginContext.jsx";
-
+import { ChatProvider } from "./contexts/ChatContext.jsx";
 import Chatroom from "./components/chatroom.jsx";
 import Contact from "./components/Contact.jsx";
 import Profile from "./components/Profile.jsx";
-import Analytics from "./components/Analytics.jsx";
+import CareerMarketVisualization from "./components/CareerMarketVisualization.jsx";
 
 function App() {
   return (
     <LoginProvider>
+    <ChatProvider>
     <Router>
       <Header/>
       <Routes>
@@ -24,10 +25,11 @@ function App() {
         <Route path="/chat" element={<Chatroom />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/analytics" element={<CareerMarketVisualization />} />
       </Routes>
       <Footer/>
     </Router>
+    </ChatProvider>
     </LoginProvider>
 
 
