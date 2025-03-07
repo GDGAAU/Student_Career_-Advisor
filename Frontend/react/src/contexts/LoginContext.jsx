@@ -14,32 +14,66 @@ function LoginProvider({ children }) {
     fName: "",
     lName: "",
   });
-  function login({ email, password }) {
-    const fetchUser = async () => {
-      let result;
-      try {
-        result = await fetch(
-          `/login?email=${email}&password=${password}`
-        ).then((response) => {
-          setToken(response.data.access_token)
-          localStorage.setItem('token', response.data.access_token);
-          response.json();
-        });
-    } catch (error) {
-        console.error("Error logging in", error);
-    }
-      if (result.ok) {
-        return { user: result, status: 0 };
+  async function login({ email, password }) {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email:email, password:password }), // Fixed
+      });
+  
+      const data = await response.json(); // Wait for response JSON
+  
+      if (response.ok) {
+        setToken(data.access_token); // Assuming `setToken` is defined
+        setUser(data); // Assuming `setUser` is defined
+        return { user: data, status: 0 };
       } else {
         return { status: 1, message: "Your entered wrong password or email" };
       }
-    };
-
-    if (fetchUser.status == 0) {
-      setUser(fetchUser.user);
+    } catch (error) {
+      console.error("Error logging in", error);
+      return { status: 1, message: "Something went wrong" };
     }
-    return fetchUser;
   }
+  
+  function logout(){
+    setUser(null);
+    setToken(null);
+  }
+
+  function editUserCredential({
+    email,
+    username,
+    userType,
+    fName,
+    lName,
+}){ 
+  const updateUser = async ()=>{
+    const response = await fetch("http://127.0.0.1:5000/",{
+      method:"PUT",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":`Bearer  ${token}`
+      },
+      body:{
+        emial:email,
+        username:username,
+        userType:userType,
+        fName:fName,
+        lName:lName,
+      }
+    }).then((response)=>{
+      return {message:response.json(),status:(response.ok)?0:1}
+    });
+    if(response.status === 0){
+      setUser(response)
+    }
+  } 
+  updateUser();
+}
   function signup({
     email,
     username,
@@ -50,14 +84,14 @@ function LoginProvider({ children }) {
     lName,
   }) {
     const createUser = async () => {
-      const result = await await fetch("/create-account", {
+      const result = await await fetch("http://127.0.0.1:5000/create-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          firstName: fName,
-          lastName: lName,
+          fName: fName,
+          lName: lName,
           username: username,
           email: email,
           password: password,
@@ -74,7 +108,7 @@ function LoginProvider({ children }) {
 
   return (
     <LoginContext.Provider
-      value={{ user, login, signup, token, userLoginData, setUserLoginData }}
+      value={{ user, login, signup, logout, editUserCredential, token, userLoginData, setUserLoginData }}
     >
       {children}
     </LoginContext.Provider>

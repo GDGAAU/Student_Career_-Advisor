@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaEdit, FaUserCircle } from 'react-icons/fa';
 import styles from './Profile.module.css';
+import { LoginContext } from '../contexts/LoginContext';
 
 const Profile = () => {
-    const [userData, setUserData] = useState({
-        email: 'user@example.com',
-        username: 'user123',
-        firstName: 'John',
-        lastName: 'Doe',
-        userType: 'student',
-    });
+    const {user, editUserCredential, logout} = useContext(LoginContext)
 
     const [isEditing, setIsEditing] = useState(false);
-    const [editData, setEditData] = useState(userData);
+    const [editData, setEditData] = useState(user);
 
-    useEffect(() => {
-        // Fetch user data from the backend or local storage
-        // Example: setUserData(fetchedUserData);
-    }, []);
 
     const handleEditChange = (e) => {
         setEditData({ ...editData, [e.target.name]: e.target.value });
@@ -25,7 +16,7 @@ const Profile = () => {
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
-        setUserData(editData);
+        editUserCredential(editData);
         setIsEditing(false);
     };
 
@@ -34,11 +25,11 @@ const Profile = () => {
             <div className={styles.profileBox}>
                 <FaEdit className={styles.editIcon} onClick={() => setIsEditing(true)} />
                 <h2 className={styles.profileTitle}>Profile</h2>
-                <div className={styles.profileHeader}>
+                {user && <><div className={styles.profileHeader}>
                     <FaUserCircle className={styles.profilePicture} />
                     <div className={styles.profileName}>
-                        <h3>{userData.firstName} {userData.lastName}</h3>
-                        <p className={styles.userType}>{userData.userType}</p>
+                        <h3>{user.fName} {user.lName}</h3>
+                        <p className={styles.userType}>{user.userType}</p>
                     </div>
                 </div>
                 <div className={styles.profileInfo}>
@@ -68,8 +59,8 @@ const Profile = () => {
                                 <label className={styles.label}>First Name:</label>
                                 <input
                                     type="text"
-                                    name="firstName"
-                                    value={editData.firstName}
+                                    name="fName"
+                                    value={editData.fName}
                                     onChange={handleEditChange}
                                     className={styles.input}
                                 />
@@ -78,19 +69,10 @@ const Profile = () => {
                                 <label className={styles.label}>Last Name:</label>
                                 <input
                                     type="text"
-                                    name="lastName"
-                                    value={editData.lastName}
+                                    name="lName"
+                                    value={editData.lName}
                                     onChange={handleEditChange}
                                     className={styles.input}
-                                />
-                            </div>
-                            <div className={styles.infoGroup}>
-                                <label className={styles.label}>Bio:</label>
-                                <textarea
-                                    name="bio"
-                                    value={editData.bio}
-                                    onChange={handleEditChange}
-                                    className={styles.textarea}
                                 />
                             </div>
                             <button type="submit" className={styles.saveButton}>Save</button>
@@ -98,24 +80,27 @@ const Profile = () => {
                     ) : (
                         <>
                             <div className={styles.infoGroup}>
-                                <label className={styles.label}>Email:</label>
-                                <p className={styles.info}>{userData.email}</p>
-                            </div>
-                            <div className={styles.infoGroup}>
-                                <label className={styles.label}>Username:</label>
-                                <p className={styles.info}>{userData.username}</p>
-                            </div>
-                            <div className={styles.infoGroup}>
                                 <label className={styles.label}>First Name:</label>
-                                <p className={styles.info}>{userData.firstName}</p>
+                                <p className={styles.info}>{user.firstName}</p>
                             </div>
                             <div className={styles.infoGroup}>
                                 <label className={styles.label}>Last Name:</label>
-                                <p className={styles.info}>{userData.lastName}</p>
+                                <p className={styles.info}>{user.lastName}</p>
+                            </div>
+                            <div className={styles.infoGroup}>
+                                <label className={styles.label}>Email:</label>
+                                <p className={styles.info}>{user.email}</p>
+                            </div>
+                            <div className={styles.infoGroup}>
+                                <label className={styles.label}>Username:</label>
+                                <p className={styles.info}>{user.username}</p>
                             </div>
                         </>
                     )}
                 </div>
+                </>}
+                {!user && <p style={{ color:'red', fontSize:"2rem" }}>Please login or signup first!</p>}
+                <button onClick={logout}>Logout</button>
             </div>
         </div>
     );

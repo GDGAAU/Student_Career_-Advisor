@@ -25,7 +25,7 @@
     word-wrap: break-word;
 }
 
-.messageUser {
+.user {
     align-self: flex-end;
     margin-left: auto;
     width: max-content;
@@ -33,7 +33,7 @@
     color: #004d40;
 }
 
-.messageAi {
+.model {
     align-self: flex-start;
     background-color: #c8e6c9;
     margin-right: auto;
