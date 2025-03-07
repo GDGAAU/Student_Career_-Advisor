@@ -7,7 +7,7 @@ from uuid import uuid4
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 model = Gemini(api_key)
 
-SECRET_KEY = uuid4()
+SECRET_KEY = str(uuid4())
 
 app.config["JWT_SECRET_KEY"] = SECRET_KEY
 jwt = JWTManager(app)
@@ -48,23 +48,30 @@ def signup():
     db.session.commit()
     user = User.query.filter_by(email=email).first()
     access_token = create_access_token(identity=username)
-    return jsonify({"user":user.to_json(),'message': 'Account has been created successfully!'},access_token=access_token), 201
+    return jsonify({'message': 'Account has been created successfully!',"access_token":access_token}), 201
+
 @app.route("/login", methods=["POST"])
 def login():
-    data =request.get_json()
-    print( "this is received data: ", data)
-    email = data.get("email")
-    password = data.get("password")
-    user_by_email = User.query.filter_by(email=email, password=password).first()
-    # user_by_username = User.query.filter_by(username=email, password=password).first()
-    if user_by_email:
-        # User found, create access token
-        access_token = create_access_token(identity=user_by_email.username)
-        return jsonify(access_token=access_token), 200  # You can return any other user data if needed
-    else:
-        # User not found, return error message
-        return jsonify(message="Invalid email or password"), 401
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
 
+    # Query the user by email
+    user_by_email = User.query.filter_by(email=email).first()
+
+    if not user_by_email:
+        return jsonify({"error": "User not found"}), 404
+
+    # Verify password (assuming you have a check_password_hash method)
+    if not (user_by_email.password == password):
+        return jsonify({"error": "Invalid password"}), 401
+
+    # Ensure the username is a string
+    username = str(user_by_email.username)  # Convert to string explicitly
+
+    # Generate JWT token with string identity
+    access_token = create_access_token(identity=username)
+    return jsonify(access_token=access_token), 200
 
 @app.route("/chat-service", methods=["POST"])
 def ask_model():
@@ -101,3 +108,10 @@ def get_messages():
     messages = Message.query.filter_by(user_id = user.id).all
 
     return jsonify([message.to_json() for message in messages])
+
+@app.route("/get-user",methods=["GET"])
+@jwt_required()
+def get_user():
+    current_user = get_jwt_identity()
+    user = User.query.filter_by(username=current_user).first()
+    return jsonify(user.to_json())

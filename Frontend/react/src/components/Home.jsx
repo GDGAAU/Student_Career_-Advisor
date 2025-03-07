@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./home.module.css"; // Importing modular CSS file
 import FloatingButton from "./FloatingButton";
+import { LoginContext } from "../contexts/LoginContext";
 
 function Home() {
+  const { token } = useContext(LoginContext);
   return (
     <div className={styles.home}>
       {/* Hero Section */}
       <header className={styles.hero}>
         <div className={styles.container}>
-          <h1 className={styles.heroTitle}>Find Your Perfect Career Path with AI</h1>
+          <h1 className={styles.heroTitle}>
+            Find Your Perfect Career Path with AI
+          </h1>
           <p className={styles.heroDescription}>
-            Our AI-driven platform helps you discover your ideal career based on your skills, interests, and goals.
+            Our AI-driven platform helps you discover your ideal career based on
+            your skills, interests, and goals.
           </p>
-          <Link to="/signup" className={styles.ctaButton}>Get Started</Link>
-          <FloatingButton/>
+          {!token ? (
+            <Link to="/signup" className={styles.ctaButton}>
+              Get Started
+            </Link>
+          ) : (
+            <Link to="/chat" className={styles.ctaButton}>
+              Visit Our AI Chat Room
+            </Link>
+          )}
+          <FloatingButton />
         </div>
       </header>
 
@@ -24,15 +37,24 @@ function Home() {
           <h2 className={styles.sectionTitle}>Features</h2>
           <div className={styles.feature}>
             <h3>Personalized Career Guidance</h3>
-            <p>Get AI-based career recommendations tailored to your strengths and aspirations.</p>
+            <p>
+              Get AI-based career recommendations tailored to your strengths and
+              aspirations.
+            </p>
           </div>
           <div className={styles.feature}>
             <h3>Skill Gap Analysis</h3>
-            <p>Identify areas where you need improvement and receive actionable advice to boost your career potential.</p>
+            <p>
+              Identify areas where you need improvement and receive actionable
+              advice to boost your career potential.
+            </p>
           </div>
           <div className={styles.feature}>
             <h3>Real-Time Industry Trends</h3>
-            <p>Stay updated with the latest trends and job opportunities in your desired field.</p>
+            <p>
+              Stay updated with the latest trends and job opportunities in your
+              desired field.
+            </p>
           </div>
         </div>
       </section>
@@ -44,7 +66,9 @@ function Home() {
           <p className={styles.ctaDescription}>
             Sign up now and let AI guide your career journey!
           </p>
-          <Link to="/signup" className={styles.ctaButton}>Sign Up Now</Link>
+          <Link to="/signup" className={styles.ctaButton}>
+            Sign Up Now
+          </Link>
         </div>
       </section>
     </div>
@@ -52,4 +76,3 @@ function Home() {
 }
 
 export default Home;
-
