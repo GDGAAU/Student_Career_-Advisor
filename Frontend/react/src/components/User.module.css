@@ -81,7 +81,7 @@
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: #25a129;
+  background-color: #1675db;
   color: white;
   font-weight: 600;
   font-size: 17px;
@@ -90,7 +90,7 @@
 }
 
 .submitbtn:hover {
-  background-color: #1b821e;
+  background-color: #165aa3;
   transform: scale(1.04);
 }
 

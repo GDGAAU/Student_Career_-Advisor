@@ -5,7 +5,8 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
-  background-color: #eeeeee;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .formCareerRequest form {
@@ -67,17 +68,22 @@
   border-radius: 4px;
   cursor: pointer;
   margin: 3px;
+  border-radius: 50%;
+  background-color: #fefefe;
+  border: 1px solid rgb(205, 205, 205);
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(0, 0, 0, 0.09);
 }
 
-.buttonAdd {
-  background-color: #0b1a0b;
-  color: #fff;
+/* .buttonAdd {
+  border-radius: 50%;
 }
 
 .buttonRemove {
   background-color: #7a1109;
   color: #fff;
-}
+} */
 
 .radioGroup {
   display: flex;
@@ -96,7 +102,7 @@
   margin-top: -55px;
   display: inline-block;
   padding: 10px 22px;
-  background-color: #04170d; /* A nice blue color */
+  background-color: #007bff; /* A nice blue color */
   color: #ffffff; /* White text */
   border: none;
   border-radius: 5px; /* Rounded corners */
